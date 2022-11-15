@@ -1,9 +1,26 @@
 package com.aydemir.movieapp.util.extensions
 
+import android.animation.Animator
+import android.animation.AnimatorListenerAdapter
 import android.view.View
 
 fun View.hide() {
-    visibility = View.GONE
+    if (visibility == View.GONE) return
+    animate()
+        ?.alpha(0f)
+        ?.setDuration(250)
+        ?.setListener(object : AnimatorListenerAdapter() {
+            var isCanceled = false
+            override fun onAnimationEnd(animation: Animator) {
+                if (isCanceled) return
+                visibility = View.GONE
+            }
+
+            override fun onAnimationCancel(animation: Animator) {
+                super.onAnimationCancel(animation)
+                isCanceled = true
+            }
+        })
 }
 
 fun View.invisible() {
@@ -11,11 +28,20 @@ fun View.invisible() {
 }
 
 fun View.show() {
-    visibility = View.VISIBLE
-}
+    if (visibility == View.VISIBLE) return
+    if (alpha == 1f) alpha = 0f
+    animate()
+        .alpha(1f)
+        .setDuration(350)
+        .setListener(object : AnimatorListenerAdapter() {
+            var isCanceled = false
+            override fun onAnimationStart(animation: Animator) {
+                visibility = View.VISIBLE
+            }
 
-/*fun ImageView.loadImage(url: String?) {
-    Picasso.get()
-        .load("https://image.tmdb.org/t/p/w500/$url")
-        .into(this)
-}*/
+            override fun onAnimationCancel(animation: Animator) {
+                super.onAnimationCancel(animation)
+                isCanceled = true
+            }
+        })
+}

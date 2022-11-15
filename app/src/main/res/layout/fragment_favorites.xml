@@ -5,7 +5,7 @@
     android:id="@+id/rootView"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#0097A7"
+    android:background="@color/color_bg"
     android:transitionGroup="true">
 
     <androidx.recyclerview.widget.RecyclerView
@@ -13,9 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:clipToPadding="false"
-        android:paddingStart="13dp"
-        android:paddingEnd="13dp"
-        android:paddingBottom="144dp"
+        android:paddingBottom="72dp"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
@@ -24,21 +22,21 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@android:color/transparent"
-        android:fitsSystemWindows="true"
         android:orientation="vertical"
         app:elevation="0dp">
 
         <TextView
             android:id="@+id/txtTitle"
             android:layout_width="match_parent"
-            android:layout_height="82dp"
+            android:layout_height="120dp"
             android:gravity="bottom"
             android:paddingStart="24dp"
             android:paddingEnd="24dp"
             android:paddingBottom="6dp"
-            android:text="Favorites"
+            android:text="@string/menu_title_favorites"
             android:textColor="@color/white"
-            android:textSize="28sp"
+            android:textSize="36sp"
+            android:textStyle="bold"
             app:layout_scrollFlags="scroll" />
 
     </com.google.android.material.appbar.AppBarLayout>

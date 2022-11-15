@@ -4,15 +4,19 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/color_bg"
     tools:context=".ui.main.MainActivity">
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNavigationView"
+        style="@style/Widget.BottomNavigationView"
         android:layout_width="match_parent"
         android:layout_height="@dimen/bottom_height"
         android:layout_alignParentBottom="true"
-        android:translationY="@dimen/bottom_height"
-        app:itemIconSize="28dp"
+        android:translationY="0dp"
+        app:backgroundTint="@color/color_bg_navigation"
+        app:itemIconSize="30dp"
+        app:itemIconTint="@color/bottom_nav_item_color_selector"
         app:labelVisibilityMode="unlabeled"
         app:menu="@menu/menu_bottom_nav" />
 

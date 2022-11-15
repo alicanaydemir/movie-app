@@ -1,14 +1,17 @@
 package com.aydemir.movieapp.ui.movieDetail
 
-import android.util.Log
 import androidx.lifecycle.viewModelScope
 import com.aydemir.movieapp.core.BaseViewModel
 import com.aydemir.movieapp.core.ErrorResponse
 import com.aydemir.movieapp.core.Resource
-import com.aydemir.movieapp.data.model.ResponseMovieDetailImages
+import com.aydemir.movieapp.data.model.Cast
+import com.aydemir.movieapp.data.model.Movie
 import com.aydemir.movieapp.data.remote.Repository
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.zip
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -17,55 +20,59 @@ class MovieDetailViewModel @Inject constructor(
     private val repositoryImp: Repository
 ) : BaseViewModel() {
 
-    private val _uiState = MutableStateFlow<UiState>(UiState.Loading(true))
+    var id: Int = 0
+
+    private val _uiState = MutableStateFlow<UiState>(UiState.Loading)
     val uiState: StateFlow<UiState> = _uiState
-
-    private val _imgBackDrops = MutableStateFlow<ResponseMovieDetailImages?>(null)
-    val imgBackDrops: StateFlow<ResponseMovieDetailImages?> = _imgBackDrops
-
 
     init {
         viewModelScope.launch {
-            repositoryImp.getMovieDetail().catch {
-                Log.i("catch", it.message.toString())
-            }.collect {
-                when (it) {
-                    is Resource.Error -> {
-                        _uiState.value = UiState.Error(it.errorResponse)
+            delay(500)
+            repositoryImp.getMovieDetail(id)
+                .zip(repositoryImp.getMovieRecommendations(id)) { r1, r2 ->
+                    if (r1 is Resource.Success && r2 is Resource.Success) {
+                        val movieDetail = MovieDetail()
+                        r1.response.apply {
+                            movieDetail.id = id
+                            movieDetail.title = title
+                            movieDetail.overview = overview
+                            movieDetail.pathPoster = posterPath
+                            movieDetail.pathBackDrops = backdropPath
+                        }
+                        r2.response.apply {
+                            movieDetail.movieRecommendations = results
+                        }
+                        movieDetail
+                    } else {
+                        null
                     }
-                    is Resource.Loading -> {
-                        _uiState.value = UiState.Loading(it.status)
-                    }
-                    is Resource.NoConnection -> {}
-                    is Resource.ServiceUnavailable -> {}
-                    is Resource.Success -> {}
-                }
-            }
-
-            repositoryImp.getMovieDetailImages().catch {
-                Log.i("catch", it.message.toString())
-            }.collect {
-                when (it) {
-                    is Resource.Error -> {
-
-                    }
-                    is Resource.Loading -> {
-
-                    }
-                    is Resource.NoConnection -> {}
-                    is Resource.ServiceUnavailable -> {}
-                    is Resource.Success -> {
-                        _imgBackDrops.value = it.response
+                }.zip(repositoryImp.getMovieCast(id)) { movieDetail, r3 ->
+                    if (movieDetail != null && r3 is Resource.Success) {
+                        movieDetail.cast = r3.response.cast
+                        movieDetail
+                    } else null
+                }.collect { result ->
+                    result?.apply {
+                        _uiState.value = UiState.Success(result)
                     }
                 }
-            }
         }
     }
 
 }
 
 sealed class UiState {
-    data class Success(val news: String) : UiState()
+    data class Success(val data: MovieDetail) : UiState()
     data class Error(val response: ErrorResponse) : UiState()
-    data class Loading(val status: Boolean) : UiState()
+    object Loading : UiState()
+}
+
+class MovieDetail {
+    var id: Int? = null
+    var overview: String? = null
+    var title: String? = null
+    var pathPoster: String? = null
+    var pathBackDrops: String? = null
+    var cast: List<Cast?>? = null
+    var movieRecommendations: List<Movie?>? = null
 }
