@@ -9,7 +9,7 @@ import kotlinx.serialization.Serializable
 @Parcelize
 data class ErrorResponse(
     @SerialName("status_code") val statusCode: Int? = null,
-    @SerialName("status_message") val statusMessage: String = "",
+    @SerialName("status_message") val statusMessage: String? = null,
     @SerialName("success") val success: Boolean? = null
 
 ) : Parcelable

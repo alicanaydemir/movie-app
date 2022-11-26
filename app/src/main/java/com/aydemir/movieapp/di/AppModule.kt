@@ -3,6 +3,7 @@ package com.aydemir.movieapp.di
 import android.content.Context
 import android.content.SharedPreferences
 import com.aydemir.movieapp.BuildConfig
+import com.aydemir.movieapp.data.local.dao.AppDao
 import com.aydemir.movieapp.data.remote.MovieAppApi
 import com.aydemir.movieapp.data.remote.Repository
 import com.aydemir.movieapp.data.remote.RepositoryImp
@@ -82,6 +83,7 @@ object AppModule {
     @Singleton
     @Provides
     fun provideRepository(
-        api: MovieAppApi
-    ): Repository = RepositoryImp(api)
+        api: MovieAppApi,
+        appDao: AppDao
+    ): Repository = RepositoryImp(api,appDao)
 }

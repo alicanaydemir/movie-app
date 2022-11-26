@@ -5,6 +5,7 @@ import com.aydemir.movieapp.core.BaseViewModel
 import com.aydemir.movieapp.core.ErrorResponse
 import com.aydemir.movieapp.core.Resource
 import com.aydemir.movieapp.data.model.Cast
+import com.aydemir.movieapp.data.model.Genre
 import com.aydemir.movieapp.data.model.Movie
 import com.aydemir.movieapp.data.remote.Repository
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -38,6 +39,7 @@ class MovieDetailViewModel @Inject constructor(
                             movieDetail.overview = overview
                             movieDetail.pathPoster = posterPath
                             movieDetail.pathBackDrops = backdropPath
+                            movieDetail.genres = genres
                         }
                         r2.response.apply {
                             movieDetail.movieRecommendations = results
@@ -74,5 +76,6 @@ class MovieDetail {
     var pathPoster: String? = null
     var pathBackDrops: String? = null
     var cast: List<Cast?>? = null
+    var genres: List<Genre?>? = null
     var movieRecommendations: List<Movie?>? = null
 }

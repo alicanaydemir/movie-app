@@ -18,21 +18,8 @@ import kotlinx.coroutines.launch
 class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::inflate) {
 
     private val viewModel: HomeViewModel by viewModels()
-    lateinit var homeListAdapter: HomeListAdapter
-
-    override fun prepareView(savedInstanceState: Bundle?) {
-        init()
-        initAdapter()
-        setListener()
-        initObserver()
-    }
-
-    private fun init() {
-
-    }
-
-    private fun initAdapter() {
-        homeListAdapter = HomeListAdapter {
+    private val homeListAdapter: HomeListAdapter by lazy {
+        HomeListAdapter {
             when (it) {
                 is HomeListAdapterEvent.ClickMovie -> {
                     it.data.id?.let { id ->
@@ -47,8 +34,26 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
                 }
             }
         }
+    }
 
+    override fun prepareView(savedInstanceState: Bundle?) {
+        init()
+        initAdapter()
+        setListener()
+        initObserver()
+    }
+
+    private fun init() {
+
+    }
+
+    private fun initAdapter() {
         binding.recyclerView.adapter = homeListAdapter
+    }
+
+    override fun onDestroyView() {
+        homeListAdapter.saveStateRecyclerViews()
+        super.onDestroyView()
     }
 
     private fun setListener() {
@@ -74,6 +79,9 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
                             }
                             is UiStateHome.Loading -> {
                                 binding.progressBar.show()
+                            }
+                            is UiStateHome.NoConnection -> {
+
                             }
                         }
                     }

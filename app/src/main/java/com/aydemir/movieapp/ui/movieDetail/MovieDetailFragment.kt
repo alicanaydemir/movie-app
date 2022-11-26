@@ -15,6 +15,8 @@ import com.aydemir.movieapp.core.Constants
 import com.aydemir.movieapp.databinding.FragmentMovieDetailBinding
 import com.aydemir.movieapp.util.extensions.hide
 import com.aydemir.movieapp.util.extensions.show
+import com.google.android.flexbox.FlexDirection
+import com.google.android.flexbox.FlexboxLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
@@ -43,6 +45,15 @@ class MovieDetailFragment :
                 LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
             adapter = movieCastAdapter
         }
+
+        val movieGenreAdapter = MovieGenreAdapter()
+        binding.recyclerViewGenre.apply {
+            val manager = FlexboxLayoutManager(context)
+            manager.flexDirection = FlexDirection.ROW
+            layoutManager = manager
+            adapter = movieGenreAdapter
+        }
+
         val movieListAdapter = MovieListAdapter {
             when (it) {
                 is MovieListAdapterEvent.ClickMovie -> {
@@ -84,7 +95,13 @@ class MovieDetailFragment :
                                         )
                                         txtMovieTitle.text = it.data.title
                                         txtMovieDesc.text = it.data.overview
+                                        (recyclerViewGenre.adapter as MovieGenreAdapter).submitList(
+                                            it.data.genres
+                                        )
+                                        if (it.data.cast?.isEmpty() == true) relativeCast.hide()
                                         (recyclerViewCast.adapter as MovieCastAdapter).submitList(it.data.cast)
+
+                                        if (it.data.movieRecommendations?.isEmpty() == true) relativeMovieRecommendations.hide()
                                         (recyclerViewMovieRecommendations.adapter as MovieListAdapter).submitList(
                                             it.data.movieRecommendations
                                         )

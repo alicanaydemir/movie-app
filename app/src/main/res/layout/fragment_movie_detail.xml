@@ -151,6 +151,32 @@
                 app:layout_constraintTop_toTopOf="@+id/imgPoster"
                 tools:text="Movie Name" />
 
+            <TextView
+                android:id="@+id/txtReleaseDate"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginEnd="18dp"
+                android:text="2019"
+                android:textColor="#AFAFAF"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/imgPoster"
+                app:layout_constraintTop_toBottomOf="@+id/txtMovieTitle" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerViewGenre"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="18dp"
+                app:layout_constraintBottom_toBottomOf="@+id/imgPoster"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/imgPoster"
+                app:layout_constraintTop_toBottomOf="@+id/txtReleaseDate" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
 

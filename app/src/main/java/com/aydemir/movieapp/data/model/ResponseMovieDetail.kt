@@ -60,15 +60,6 @@ data class ResponseMovieDetail(
 
     @Serializable
     @Parcelize
-    data class Genre(
-        @SerialName("id")
-        val id: Int?,
-        @SerialName("name")
-        val name: String?
-    ) : Parcelable
-
-    @Serializable
-    @Parcelize
     data class ProductionCompany(
         @SerialName("id")
         val id: Int?,
@@ -98,3 +89,12 @@ data class ResponseMovieDetail(
         val name: String?
     ) : Parcelable
 }
+
+@Serializable
+@Parcelize
+data class Genre(
+    @SerialName("id")
+    val id: Int?,
+    @SerialName("name")
+    val name: String?
+) : Parcelable

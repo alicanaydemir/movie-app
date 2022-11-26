@@ -28,6 +28,8 @@ class HomeListAdapter(private val listener: EventListener) :
 
     }) {
 
+    private val mBoundViewHolders = hashMapOf<Int, BaseViewHolder<ViewBinding>>()
+
     private val scrollStates = mutableMapOf<Int, Parcelable?>()
 
     override fun createViewHolderInstance(
@@ -47,13 +49,11 @@ class HomeListAdapter(private val listener: EventListener) :
                 LayoutInflater.from(parent.context), parent, false
             )
             val holder = BaseViewHolder(binding)
+
             binding.recyclerView.apply {
-                layoutManager =
-                    LinearLayoutManager(
-                        this.context,
-                        LinearLayoutManager.HORIZONTAL,
-                        false
-                    )
+                layoutManager = LinearLayoutManager(
+                    this.context, LinearLayoutManager.HORIZONTAL, false
+                )
                 val movieListAdapter = MovieListAdapter {
                     if (it is MovieListAdapterEvent.ClickMovie) {
                         listener.invoke(HomeListAdapterEvent.ClickMovie(it.data))
@@ -72,14 +72,24 @@ class HomeListAdapter(private val listener: EventListener) :
             }
         } else if (binding is ItemHomeListBinding) {
 
-            binding.apply {
-                (recyclerView.adapter as MovieListAdapter).submitList(getItem(position).data)
+            binding.recyclerView.apply {
+                (adapter as MovieListAdapter).submitList(getItem(position).data)
+                isNestedScrollingEnabled = false
+                val state = scrollStates[position]
+                if (state != null) {
+                    layoutManager?.onRestoreInstanceState(state)
+                } else {
+                    layoutManager?.scrollToPosition(0)
+                }
             }
-            val state = scrollStates[position]
-            if (state != null) {
-                binding.recyclerView.layoutManager?.onRestoreInstanceState(state)
-            } else {
-                binding.recyclerView.layoutManager?.scrollToPosition(0)
+        }
+    }
+
+    override fun onViewAttachedToWindow(holder: BaseViewHolder<ViewBinding>) {
+        super.onViewAttachedToWindow(holder)
+        when (holder.binding) {
+            is ItemHomeListBinding -> {
+                mBoundViewHolders[holder.bindingAdapterPosition] = holder
             }
         }
     }
@@ -89,8 +99,19 @@ class HomeListAdapter(private val listener: EventListener) :
         when (holder.binding) {
             is ItemHomeListBinding -> {
                 val key = holder.bindingAdapterPosition
-                scrollStates[key] =
-                    holder.binding.recyclerView.layoutManager?.onSaveInstanceState()
+                scrollStates[key] = holder.binding.recyclerView.layoutManager?.onSaveInstanceState()
+            }
+        }
+    }
+
+    fun saveStateRecyclerViews() {
+        scrollStates.clear()
+        mBoundViewHolders.forEach {
+            it.value
+            if (it.value.binding is ItemHomeListBinding) {
+                scrollStates[it.key] =
+                    (it.value.binding as ItemHomeListBinding).recyclerView.layoutManager?.onSaveInstanceState()
+
             }
         }
     }

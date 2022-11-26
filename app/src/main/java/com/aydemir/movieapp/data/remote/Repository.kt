@@ -1,6 +1,7 @@
 package com.aydemir.movieapp.data.remote
 
 import com.aydemir.movieapp.core.Resource
+import com.aydemir.movieapp.data.model.Movie
 import com.aydemir.movieapp.data.model.ResponseMovieCast
 import com.aydemir.movieapp.data.model.ResponseMovieDetail
 import com.aydemir.movieapp.data.model.ResponseMovieList
@@ -14,4 +15,6 @@ interface Repository {
     fun getTopRated(): Flow<Resource<ResponseMovieList>>
     fun getPopular(): Flow<Resource<ResponseMovieList>>
     fun getUpcoming(): Flow<Resource<ResponseMovieList>>
+
+    fun getFavorites(): Flow<Resource<List<Movie>>>
 }

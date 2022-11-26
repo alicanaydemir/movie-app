@@ -42,7 +42,9 @@ class HomeViewModel @Inject constructor(
                         homeList
                     } else null
                 }.collect { result ->
-                    result?.apply {
+                    if (result == null) {
+                        _uiState.value = UiStateHome.Error(ErrorResponse())
+                    } else {
                         _uiState.value = UiStateHome.Success(result)
                     }
                 }
@@ -55,6 +57,7 @@ sealed class UiStateHome {
     data class Success(val data: HomeList) : UiStateHome()
     data class Error(val response: ErrorResponse) : UiStateHome()
     object Loading : UiStateHome()
+    object NoConnection : UiStateHome()
 }
 
 class HomeList {
