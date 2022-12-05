@@ -13,8 +13,8 @@ import com.aydemir.movieapp.core.EventListener
 import com.aydemir.movieapp.data.model.Movie
 import com.aydemir.movieapp.databinding.ItemHomeHeaderBinding
 import com.aydemir.movieapp.databinding.ItemHomeListBinding
-import com.aydemir.movieapp.ui.movieDetail.MovieListAdapter
-import com.aydemir.movieapp.ui.movieDetail.MovieListAdapterEvent
+import com.aydemir.movieapp.ui.movieDetail.MovieListHorizontalAdapter
+import com.aydemir.movieapp.ui.movieDetail.MovieListHorizontalAdapterEvent
 
 class HomeListAdapter(private val listener: EventListener) :
     BaseAdapter<HomeItem>(object : DiffUtil.ItemCallback<HomeItem>() {
@@ -54,12 +54,12 @@ class HomeListAdapter(private val listener: EventListener) :
                 layoutManager = LinearLayoutManager(
                     this.context, LinearLayoutManager.HORIZONTAL, false
                 )
-                val movieListAdapter = MovieListAdapter {
-                    if (it is MovieListAdapterEvent.ClickMovie) {
+                val movieListHorizontalAdapter = MovieListHorizontalAdapter {
+                    if (it is MovieListHorizontalAdapterEvent.ClickMovie) {
                         listener.invoke(HomeListAdapterEvent.ClickMovie(it.data))
                     }
                 }
-                adapter = movieListAdapter
+                adapter = movieListHorizontalAdapter
             }
             return holder
         }
@@ -73,7 +73,7 @@ class HomeListAdapter(private val listener: EventListener) :
         } else if (binding is ItemHomeListBinding) {
 
             binding.recyclerView.apply {
-                (adapter as MovieListAdapter).submitList(getItem(position).data)
+                (adapter as MovieListHorizontalAdapter).submitList(getItem(position).data)
                 isNestedScrollingEnabled = false
                 val state = scrollStates[position]
                 if (state != null) {

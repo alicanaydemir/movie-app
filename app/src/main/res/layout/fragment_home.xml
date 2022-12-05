@@ -42,7 +42,7 @@
             android:layout_height="120dp"
             android:gravity="bottom"
             android:paddingStart="18dp"
-            android:paddingEnd="24dp"
+            android:paddingEnd="18dp"
             android:paddingBottom="6dp"
             android:text="@string/app_name"
             android:textColor="@color/white"

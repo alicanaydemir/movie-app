@@ -1,6 +1,5 @@
 package com.aydemir.movieapp.data.remote
 
-import com.aydemir.movieapp.core.ErrorResponse
 import com.aydemir.movieapp.core.Resource
 import com.aydemir.movieapp.data.local.dao.AppDao
 import com.aydemir.movieapp.data.model.Movie
@@ -11,7 +10,6 @@ import com.aydemir.movieapp.util.extensions.applyDispatchers
 import com.aydemir.movieapp.util.extensions.catchError
 import com.aydemir.movieapp.util.extensions.filterResponse
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
 
@@ -50,11 +48,21 @@ class RepositoryImp @Inject constructor(
         emit(data.filterResponse())
     }.applyDispatchers().catchError()
 
-    override fun getFavorites(): Flow<Resource<List<Movie>>> = flow<Resource<List<Movie>>> {
-        appDao.getFavorites().catch {
-            Resource.Error(ErrorResponse())
-        }.collect {
+    override fun getFavoriteMovies(): Flow<Resource<List<Movie>>> = flow {
+        appDao.getFavoriteMovies().collect {
             emit(Resource.Success(it))
         }
+    }.applyDispatchers().catchError()
+
+    override fun insertFavoriteMovie(movie: Movie): Flow<Resource<Long>> = flow {
+        emit(Resource.Success(appDao.insertFavoriteMovie(movie)))
+    }.applyDispatchers().catchError()
+
+    override fun deleteFavoriteMovie(movie: Movie): Flow<Resource<Unit>> = flow {
+        emit(Resource.Success(appDao.deleteFavoriteMovie(movie)))
+    }.applyDispatchers().catchError()
+
+    override fun getFavoriteMovie(id: Int): Flow<Resource<Movie?>> = flow {
+        emit(Resource.Success(appDao.getFavoriteMovie(id)))
     }.applyDispatchers().catchError()
 }

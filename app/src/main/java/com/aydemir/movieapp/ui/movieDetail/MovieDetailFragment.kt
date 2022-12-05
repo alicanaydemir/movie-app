@@ -10,9 +10,11 @@ import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import coil.load
 import com.aydemir.movieapp.NavGraphDirections
+import com.aydemir.movieapp.R
 import com.aydemir.movieapp.core.BaseFragment
 import com.aydemir.movieapp.core.Constants
 import com.aydemir.movieapp.databinding.FragmentMovieDetailBinding
+import com.aydemir.movieapp.util.extensions.getDateFormatted
 import com.aydemir.movieapp.util.extensions.hide
 import com.aydemir.movieapp.util.extensions.show
 import com.google.android.flexbox.FlexDirection
@@ -54,9 +56,9 @@ class MovieDetailFragment :
             adapter = movieGenreAdapter
         }
 
-        val movieListAdapter = MovieListAdapter {
+        val movieListHorizontalAdapter = MovieListHorizontalAdapter {
             when (it) {
-                is MovieListAdapterEvent.ClickMovie -> {
+                is MovieListHorizontalAdapterEvent.ClickMovie -> {
                     it.data.id?.apply {
                         val action = NavGraphDirections.actionGlobalMovieDetailFragment(this)
                         findNavController().navigate(action)
@@ -67,7 +69,7 @@ class MovieDetailFragment :
         binding.recyclerViewMovieRecommendations.apply {
             layoutManager =
                 LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
-            adapter = movieListAdapter
+            adapter = movieListHorizontalAdapter
         }
     }
 
@@ -75,16 +77,18 @@ class MovieDetailFragment :
         binding.imgBack.setOnClickListener {
             findNavController().popBackStack()
         }
+        binding.imgFavorite.setOnClickListener {
+            viewModel.doFavorite()
+        }
     }
 
     private fun initObserver() {
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                //this is for one flow
                 viewLifecycleOwner.lifecycleScope.launch {
-                    viewModel.uiState.collect {
+                    viewModel.uiStateMovieDetail.collect {
                         when (it) {
-                            is UiState.Success -> {
+                            is UiStateMovieDetail.Success -> {
                                 it.apply {
                                     binding.apply {
                                         imgBackDrop.load(
@@ -99,23 +103,35 @@ class MovieDetailFragment :
                                             it.data.genres
                                         )
                                         if (it.data.cast?.isEmpty() == true) relativeCast.hide()
+                                        else relativeCast.show()
                                         (recyclerViewCast.adapter as MovieCastAdapter).submitList(it.data.cast)
 
                                         if (it.data.movieRecommendations?.isEmpty() == true) relativeMovieRecommendations.hide()
-                                        (recyclerViewMovieRecommendations.adapter as MovieListAdapter).submitList(
+                                        else relativeMovieRecommendations.show()
+                                        (recyclerViewMovieRecommendations.adapter as MovieListHorizontalAdapter).submitList(
                                             it.data.movieRecommendations
                                         )
+                                        txtReleaseDate.text=it.data.releaseDate?.getDateFormatted()
                                     }
                                 }
                                 binding.progressBar.hide()
                                 binding.nested.show()
                             }
-                            is UiState.Error -> {
+                            is UiStateMovieDetail.Error -> {
                                 binding.progressBar.hide()
                             }
-                            is UiState.Loading -> {
+                            is UiStateMovieDetail.Loading -> {
                                 binding.progressBar.show()
                             }
+                        }
+                    }
+                }
+                viewLifecycleOwner.lifecycleScope.launch {
+                    viewModel.isFavorite.collect {
+                        if (it) {
+                            binding.imgFavorite.setImageResource(R.drawable.ic_bookmark)
+                        } else {
+                            binding.imgFavorite.setImageResource(R.drawable.ic_bookmark_border)
                         }
                     }
                 }

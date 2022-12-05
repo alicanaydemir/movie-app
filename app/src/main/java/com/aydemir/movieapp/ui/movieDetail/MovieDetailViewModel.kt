@@ -23,50 +23,136 @@ class MovieDetailViewModel @Inject constructor(
 
     var id: Int = 0
 
-    private val _uiState = MutableStateFlow<UiState>(UiState.Loading)
-    val uiState: StateFlow<UiState> = _uiState
+    private val _uiStateMovieDetail =
+        MutableStateFlow<UiStateMovieDetail>(UiStateMovieDetail.Loading)
+    val uiStateMovieDetail: StateFlow<UiStateMovieDetail> = _uiStateMovieDetail
+
+    private val _isFavorite = MutableStateFlow(false)
+    val isFavorite: StateFlow<Boolean> = _isFavorite
 
     init {
         viewModelScope.launch {
             delay(500)
-            repositoryImp.getMovieDetail(id)
-                .zip(repositoryImp.getMovieRecommendations(id)) { r1, r2 ->
-                    if (r1 is Resource.Success && r2 is Resource.Success) {
-                        val movieDetail = MovieDetail()
-                        r1.response.apply {
-                            movieDetail.id = id
-                            movieDetail.title = title
-                            movieDetail.overview = overview
-                            movieDetail.pathPoster = posterPath
-                            movieDetail.pathBackDrops = backdropPath
-                            movieDetail.genres = genres
-                        }
-                        r2.response.apply {
-                            movieDetail.movieRecommendations = results
-                        }
-                        movieDetail
-                    } else {
-                        null
+            getDetails()
+            isFavoriteMovie()
+        }
+    }
+
+    private suspend fun getDetails() {
+        repositoryImp.getMovieDetail(id)
+            .zip(repositoryImp.getMovieRecommendations(id)) { r1, r2 ->
+                if (r1 is Resource.Success && r2 is Resource.Success) {
+                    val movieDetail = MovieDetail()
+                    r1.response.apply {
+                        movieDetail.id = id
+                        movieDetail.title = title
+                        movieDetail.overview = overview
+                        movieDetail.releaseDate = releaseDate
+                        movieDetail.pathPoster = posterPath
+                        movieDetail.pathBackDrops = backdropPath ?: posterPath
+                        movieDetail.genres = genres
                     }
-                }.zip(repositoryImp.getMovieCast(id)) { movieDetail, r3 ->
-                    if (movieDetail != null && r3 is Resource.Success) {
-                        movieDetail.cast = r3.response.cast
-                        movieDetail
-                    } else null
-                }.collect { result ->
-                    result?.apply {
-                        _uiState.value = UiState.Success(result)
+                    r2.response.apply {
+                        movieDetail.movieRecommendations = results
+                    }
+                    movieDetail
+                } else {
+                    null
+                }
+            }.zip(repositoryImp.getMovieCast(id)) { movieDetail, r3 ->
+                if (movieDetail != null && r3 is Resource.Success) {
+                    movieDetail.cast = r3.response.cast
+                    movieDetail
+                } else null
+            }.collect { result ->
+                result?.apply {
+                    _uiStateMovieDetail.value = UiStateMovieDetail.Success(result)
+                }
+            }
+    }
+
+    fun insertFavoriteMovie() {
+        if (_uiStateMovieDetail.value is UiStateMovieDetail.Success) {
+            (_uiStateMovieDetail.value as UiStateMovieDetail.Success).let { movie ->
+                viewModelScope.launch {
+                    repositoryImp.insertFavoriteMovie(
+                        Movie(
+                            id = movie.data.id,
+                            title = movie.data.title,
+                            posterPath = movie.data.pathPoster
+                        )
+                    ).collect {
+                        when (it) {
+                            is Resource.Success -> {
+                                isFavoriteMovie()
+                            }
+                            is Resource.Error -> {}
+                            Resource.NoConnection -> {}
+                        }
+
                     }
                 }
+            }
+        }
+    }
+
+
+    fun deleteFavoriteMovie() {
+        if (_uiStateMovieDetail.value is UiStateMovieDetail.Success) {
+            (_uiStateMovieDetail.value as UiStateMovieDetail.Success).let { movie ->
+                viewModelScope.launch {
+                    repositoryImp.deleteFavoriteMovie(
+                        Movie(
+                            id = movie.data.id,
+                            title = movie.data.title,
+                            posterPath = movie.data.pathPoster
+                        )
+                    ).collect {
+                        when (it) {
+                            is Resource.Success -> {
+                                isFavoriteMovie()
+                            }
+                            is Resource.Error -> {}
+                            Resource.NoConnection -> {}
+                        }
+
+                    }
+                }
+            }
+        }
+    }
+
+    fun doFavorite() {
+        if (_isFavorite.value) {
+            deleteFavoriteMovie()
+        } else {
+            insertFavoriteMovie()
+        }
+    }
+
+    private fun isFavoriteMovie() {
+        viewModelScope.launch {
+            repositoryImp.getFavoriteMovie(
+                id
+            ).collect {
+                when (it) {
+                    is Resource.Success -> {
+                        _isFavorite.value = it.response != null
+                    }
+                    is Resource.Error -> {}
+                    Resource.NoConnection -> {}
+                }
+
+            }
         }
     }
 
 }
 
-sealed class UiState {
-    data class Success(val data: MovieDetail) : UiState()
-    data class Error(val response: ErrorResponse) : UiState()
-    object Loading : UiState()
+sealed class UiStateMovieDetail {
+    data class Success(val data: MovieDetail) : UiStateMovieDetail()
+    data class Error(val response: ErrorResponse) : UiStateMovieDetail()
+    object Loading : UiStateMovieDetail()
 }
 
 class MovieDetail {
@@ -75,6 +161,7 @@ class MovieDetail {
     var title: String? = null
     var pathPoster: String? = null
     var pathBackDrops: String? = null
+    var releaseDate: String? = null
     var cast: List<Cast?>? = null
     var genres: List<Genre?>? = null
     var movieRecommendations: List<Movie?>? = null

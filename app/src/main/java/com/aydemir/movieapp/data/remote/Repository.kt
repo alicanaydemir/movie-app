@@ -16,5 +16,8 @@ interface Repository {
     fun getPopular(): Flow<Resource<ResponseMovieList>>
     fun getUpcoming(): Flow<Resource<ResponseMovieList>>
 
-    fun getFavorites(): Flow<Resource<List<Movie>>>
+    fun getFavoriteMovies(): Flow<Resource<List<Movie>>>
+    fun insertFavoriteMovie(movie: Movie): Flow<Resource<Long>>
+    fun deleteFavoriteMovie(movie: Movie): Flow<Resource<Unit>>
+    fun getFavoriteMovie(id: Int): Flow<Resource<Movie?>>
 }

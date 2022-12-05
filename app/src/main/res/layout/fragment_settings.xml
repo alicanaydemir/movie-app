@@ -24,17 +24,16 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@android:color/transparent"
-        android:fitsSystemWindows="true"
         android:orientation="vertical"
         app:elevation="0dp">
 
         <TextView
             android:id="@+id/txtTitle"
             android:layout_width="match_parent"
-            android:layout_height="72dp"
+            android:layout_height="120dp"
             android:gravity="bottom"
-            android:paddingStart="24dp"
-            android:paddingEnd="24dp"
+            android:paddingStart="18dp"
+            android:paddingEnd="18dp"
             android:paddingBottom="6dp"
             android:text="@string/menu_title_settings"
             android:textColor="@color/white"

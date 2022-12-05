@@ -3,6 +3,8 @@ package com.aydemir.movieapp.util.extensions
 import android.animation.Animator
 import android.animation.AnimatorListenerAdapter
 import android.view.View
+import java.text.SimpleDateFormat
+import java.util.*
 
 fun View.hide() {
     if (visibility == View.GONE) return
@@ -44,4 +46,14 @@ fun View.show() {
                 isCanceled = true
             }
         })
+}
+
+
+fun String?.getDateFormatted(): String {
+    val date = this?.let { SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).parse(it) }
+    return date?.let {
+        val calendar = Calendar.getInstance()
+        calendar.time = it
+        calendar.get(Calendar.YEAR).toString()
+    } ?: ""
 }
