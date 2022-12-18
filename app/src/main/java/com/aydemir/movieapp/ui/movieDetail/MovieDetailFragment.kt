@@ -111,16 +111,21 @@ class MovieDetailFragment :
                                         (recyclerViewMovieRecommendations.adapter as MovieListHorizontalAdapter).submitList(
                                             it.data.movieRecommendations
                                         )
-                                        txtReleaseDate.text=it.data.releaseDate?.getDateFormatted()
+                                        txtReleaseDate.text =
+                                            it.data.releaseDate?.getDateFormatted()
                                     }
                                 }
                                 binding.progressBar.hide()
                                 binding.nested.show()
                             }
                             is UiStateMovieDetail.Error -> {
+                                binding.txtTitleError.text = it.response.statusMessage
                                 binding.progressBar.hide()
+                                binding.txtTitleError.show()
                             }
                             is UiStateMovieDetail.Loading -> {
+                                binding.nested.hide()
+                                binding.txtTitleError.hide()
                                 binding.progressBar.show()
                             }
                         }

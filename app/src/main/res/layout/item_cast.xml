@@ -8,8 +8,8 @@
 
     <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/imgProfile"
-        android:layout_width="110dp"
-        android:layout_height="110dp"
+        android:layout_width="105dp"
+        android:layout_height="105dp"
         android:layout_alignParentTop="true"
         android:layout_centerInParent="true"
         android:scaleType="centerCrop"
@@ -28,7 +28,6 @@
         android:gravity="center"
         android:lines="2"
         android:maxLines="2"
-        android:text="TextView"
         android:textColor="@color/white"
         android:textSize="12sp" />
 

@@ -1,6 +1,8 @@
 package com.aydemir.movieapp.ui.movieDetail
 
+import android.content.Context
 import androidx.lifecycle.viewModelScope
+import com.aydemir.movieapp.R
 import com.aydemir.movieapp.core.BaseViewModel
 import com.aydemir.movieapp.core.ErrorResponse
 import com.aydemir.movieapp.core.Resource
@@ -9,6 +11,7 @@ import com.aydemir.movieapp.data.model.Genre
 import com.aydemir.movieapp.data.model.Movie
 import com.aydemir.movieapp.data.remote.Repository
 import dagger.hilt.android.lifecycle.HiltViewModel
+import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -18,6 +21,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class MovieDetailViewModel @Inject constructor(
+    @ApplicationContext val application: Context,
     private val repositoryImp: Repository
 ) : BaseViewModel() {
 
@@ -65,7 +69,16 @@ class MovieDetailViewModel @Inject constructor(
                     movieDetail
                 } else null
             }.collect { result ->
-                result?.apply {
+                if (result == null) {
+                    _uiStateMovieDetail.value =
+                        UiStateMovieDetail.Error(
+                            ErrorResponse(
+                                statusMessage = application.resources.getString(
+                                    R.string.error_occurred
+                                )
+                            )
+                        )
+                } else {
                     _uiStateMovieDetail.value = UiStateMovieDetail.Success(result)
                 }
             }

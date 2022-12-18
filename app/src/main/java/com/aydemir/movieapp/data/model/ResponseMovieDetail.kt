@@ -32,18 +32,12 @@ data class ResponseMovieDetail(
     val popularity: Double?,
     @SerialName("poster_path")
     val posterPath: String?,
-    @SerialName("production_companies")
-    val productionCompanies: List<ProductionCompany?>?,
-    @SerialName("production_countries")
-    val productionCountries: List<ProductionCountry?>?,
     @SerialName("release_date")
     val releaseDate: String?,
     @SerialName("revenue")
     val revenue: Int?,
     @SerialName("runtime")
     val runtime: Int?,
-    @SerialName("spoken_languages")
-    val spokenLanguages: List<SpokenLanguage?>?,
     @SerialName("status")
     val status: String?,
     @SerialName("tagline")
@@ -56,39 +50,7 @@ data class ResponseMovieDetail(
     val voteAverage: Double?,
     @SerialName("vote_count")
     val voteCount: Int?
-) : Parcelable {
-
-    @Serializable
-    @Parcelize
-    data class ProductionCompany(
-        @SerialName("id")
-        val id: Int?,
-        @SerialName("logo_path")
-        val logoPath: String?,
-        @SerialName("name")
-        val name: String?,
-        @SerialName("origin_country")
-        val originCountry: String?
-    ) : Parcelable
-
-    @Serializable
-    @Parcelize
-    data class ProductionCountry(
-        @SerialName("iso_3166_1")
-        val iso31661: String?,
-        @SerialName("name")
-        val name: String?
-    ) : Parcelable
-
-    @Serializable
-    @Parcelize
-    data class SpokenLanguage(
-        @SerialName("iso_639_1")
-        val iso6391: String?,
-        @SerialName("name")
-        val name: String?
-    ) : Parcelable
-}
+) : Parcelable
 
 @Serializable
 @Parcelize
