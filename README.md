@@ -14,6 +14,6 @@ A simple Android application to show the MVVM design pattern usage with followin
 - [OkHttp3](https://github.com/square/okhttp) - Network interceptor
 - [Retrofit](https://github.com/square/retrofit) - HTTP client
 -  Material Components - Material Design
-- [Kotlin DSL](https://docs.gradle.org/current/userguide/kotlin_dsl.html) - Alternative syntax to
-  the Groovy DSL
 - [Navigation](https://developer.android.com/guide/navigation) - Navigate through the app
+- [flexbox-layout](https://github.com/google/flexbox-layout) - FlexboxLayout is a library project which brings the similar capabilities of CSS Flexible Box Layout Module to Android
+- [Coil](https://github.com/coil-kt/coil) - An image loading library for Android

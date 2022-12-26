@@ -14,7 +14,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:text="No favorite radios here..."
+        android:text="@string/no_favorite_movies_title"
         android:textColor="@color/white"
         android:textSize="16sp"
         android:visibility="gone"

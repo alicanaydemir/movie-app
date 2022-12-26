@@ -14,7 +14,7 @@ class CustomSettingItem(context: Context?, private val attrs: AttributeSet?) :
     private var binding: ViewCustomSettingItemBinding
 
     init {
-        binding = ViewCustomSettingItemBinding.inflate(LayoutInflater.from(context), this, true)
+        binding = ViewCustomSettingItemBinding.inflate(LayoutInflater.from(context), this)
         setupAttributes()
     }
 
