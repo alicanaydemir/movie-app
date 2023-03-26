@@ -40,9 +40,6 @@ class MovieListHorizontalAdapter(private val listener: EventListener) :
                     position
                 ).posterPath
             )
-            this.txtMovieTitle.text = getItem(
-                position
-            ).title
         }
     }
 }

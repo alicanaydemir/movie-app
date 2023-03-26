@@ -51,5 +51,5 @@ data class Movie(
     @SerialName("vote_average")
     val voteAverage: Double? = null,
     @SerialName("vote_count")
-    val voteCount: Double? = null
+    val voteCount: Int? = null
 ) : Parcelable

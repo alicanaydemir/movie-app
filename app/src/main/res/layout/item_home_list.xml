@@ -9,7 +9,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:clipToPadding="false"
-        android:paddingStart="18dp"
-        android:paddingEnd="0dp" />
+        android:paddingStart="@dimen/general_margin"
+        android:paddingEnd="0dp"
+        android:paddingBottom="12dp" />
 
 </RelativeLayout>

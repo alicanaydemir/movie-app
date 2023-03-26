@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginStart="9dp"
-    android:layout_marginEnd="9dp">
+    android:layout_marginStart="4dp"
+    android:layout_marginEnd="4dp">
 
     <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/imgMoviePosterPath"
@@ -14,26 +14,12 @@
         android:layout_alignParentTop="true"
         android:layout_centerInParent="true"
         android:scaleType="centerCrop"
-        app:layout_constraintDimensionRatio="1.5:2.1"
+        app:layout_constraintDimensionRatio="1.1:1.5"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintWidth_percent="1"
         app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerSize6Percent"
         tools:srcCompat="@tools:sample/backgrounds/scenic" />
-
-    <TextView
-        android:id="@+id/txtMovieTitle"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:gravity="center"
-        android:lines="2"
-        android:maxLines="2"
-        android:textColor="@color/white"
-        android:textSize="12sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/imgMoviePosterPath" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

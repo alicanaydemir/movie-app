@@ -1,6 +1,7 @@
 package com.aydemir.movieapp.ui.movieDetail
 
 import android.content.Context
+import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.viewModelScope
 import com.aydemir.movieapp.R
 import com.aydemir.movieapp.core.BaseViewModel
@@ -22,10 +23,11 @@ import javax.inject.Inject
 @HiltViewModel
 class MovieDetailViewModel @Inject constructor(
     @ApplicationContext val application: Context,
-    private val repositoryImp: Repository
+    private val repositoryImp: Repository,
+    state: SavedStateHandle
 ) : BaseViewModel() {
 
-    var id: Int = 0
+    var id: Int = state["id"] ?: 0
 
     private val _uiStateMovieDetail =
         MutableStateFlow<UiStateMovieDetail>(UiStateMovieDetail.Loading)
@@ -44,7 +46,7 @@ class MovieDetailViewModel @Inject constructor(
 
     private suspend fun getDetails() {
         repositoryImp.getMovieDetail(id)
-            .zip(repositoryImp.getMovieRecommendations(id)) { r1, r2 ->
+            .zip(repositoryImp.getMovieSimilar(id)) { r1, r2 ->
                 if (r1 is Resource.Success && r2 is Resource.Success) {
                     val movieDetail = MovieDetail()
                     r1.response.apply {

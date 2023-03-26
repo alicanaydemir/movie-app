@@ -29,8 +29,7 @@ class HomeListAdapter(private val listener: EventListener) :
     }) {
 
     private val mBoundViewHolders = hashMapOf<Int, BaseViewHolder<ViewBinding>>()
-
-    private val scrollStates = mutableMapOf<Int, Parcelable?>()
+    var scrollStates = mutableMapOf<Int, Parcelable?>()
 
     override fun createViewHolderInstance(
         parent: ViewGroup, viewType: Int
@@ -111,7 +110,6 @@ class HomeListAdapter(private val listener: EventListener) :
             if (it.value.binding is ItemHomeListBinding) {
                 scrollStates[it.key] =
                     (it.value.binding as ItemHomeListBinding).recyclerView.layoutManager?.onSaveInstanceState()
-
             }
         }
     }

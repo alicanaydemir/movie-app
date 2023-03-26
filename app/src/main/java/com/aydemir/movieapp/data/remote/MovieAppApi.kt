@@ -11,8 +11,8 @@ interface MovieAppApi {
     @GET("movie/{id}")
     suspend fun getMovieDetail(@Path("id") id: Int): Response<ResponseMovieDetail>
 
-    @GET("movie/{id}/recommendations")
-    suspend fun getMovieRecommendations(@Path("id") id: Int): Response<ResponseMovieList>
+    @GET("movie/{id}/similar")
+    suspend fun getMovieSimilar(@Path("id") id: Int): Response<ResponseMovieList>
 
     @GET("movie/{id}/credits")
     suspend fun getMovieCast(@Path("id") id: Int): Response<ResponseMovieCast>

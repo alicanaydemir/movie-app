@@ -11,7 +11,7 @@ interface Repository {
     fun getMovieDetail(id: Int): Flow<Resource<ResponseMovieDetail>>
     fun getMovieCast(id: Int): Flow<Resource<ResponseMovieCast>>
 
-    fun getMovieRecommendations(id: Int): Flow<Resource<ResponseMovieList>>
+    fun getMovieSimilar(id: Int): Flow<Resource<ResponseMovieList>>
     fun getTopRated(): Flow<Resource<ResponseMovieList>>
     fun getPopular(): Flow<Resource<ResponseMovieList>>
     fun getUpcoming(): Flow<Resource<ResponseMovieList>>

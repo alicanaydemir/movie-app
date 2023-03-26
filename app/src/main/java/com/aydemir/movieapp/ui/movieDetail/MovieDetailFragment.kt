@@ -26,7 +26,6 @@ import kotlinx.coroutines.launch
 class MovieDetailFragment :
     BaseFragment<FragmentMovieDetailBinding>(FragmentMovieDetailBinding::inflate) {
 
-    private val args: MovieDetailFragmentArgs by navArgs()
     private val viewModel: MovieDetailViewModel by viewModels()
 
     override fun prepareView(savedInstanceState: Bundle?) {
@@ -37,7 +36,7 @@ class MovieDetailFragment :
     }
 
     private fun init() {
-        viewModel.id = args.id
+
     }
 
     private fun initAdapter() {

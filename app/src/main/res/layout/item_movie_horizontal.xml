@@ -4,31 +4,17 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:layout_marginEnd="12dp">
+    android:layout_marginEnd="8dp">
 
     <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/imgMoviePosterPath"
-        android:layout_width="150dp"
-        android:layout_height="210dp"
+        android:layout_width="110dp"
+        android:layout_height="150dp"
         android:layout_alignParentTop="true"
         android:layout_centerInParent="true"
         android:scaleType="centerCrop"
         app:layout_constraintTop_toTopOf="parent"
         app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerSize6Percent"
         tools:srcCompat="@tools:sample/backgrounds/scenic" />
-
-    <TextView
-        android:id="@+id/txtMovieTitle"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/imgMoviePosterPath"
-        android:layout_alignStart="@id/imgMoviePosterPath"
-        android:layout_alignEnd="@id/imgMoviePosterPath"
-        android:layout_marginTop="8dp"
-        android:gravity="center"
-        android:lines="2"
-        android:maxLines="2"
-        android:textColor="@color/white"
-        android:textSize="12sp" />
 
 </RelativeLayout>

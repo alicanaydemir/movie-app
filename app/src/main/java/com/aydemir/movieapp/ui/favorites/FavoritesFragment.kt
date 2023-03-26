@@ -1,5 +1,6 @@
 package com.aydemir.movieapp.ui.favorites
 
+import android.content.res.Configuration
 import android.os.Bundle
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
@@ -51,7 +52,7 @@ class FavoritesFragment :
     }
 
     private fun initAdapter() {
-        binding.recyclerView.layoutManager = GridLayoutManager(context, 2)
+        binding.recyclerView.layoutManager = GridLayoutManager(context,         if(resources.getConfiguration().orientation== Configuration.ORIENTATION_PORTRAIT) 3 else 3)
         binding.recyclerView.adapter = favoriteMovieListAdapter
     }
 

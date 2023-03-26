@@ -28,8 +28,8 @@ class RepositoryImp @Inject constructor(
         emit(data.filterResponse())
     }.applyDispatchers().catchError()
 
-    override fun getMovieRecommendations(id: Int): Flow<Resource<ResponseMovieList>> = flow {
-        val data = api.getMovieRecommendations(id)
+    override fun getMovieSimilar(id: Int): Flow<Resource<ResponseMovieList>> = flow {
+        val data = api.getMovieSimilar(id)
         emit(data.filterResponse())
     }.applyDispatchers().catchError()
 

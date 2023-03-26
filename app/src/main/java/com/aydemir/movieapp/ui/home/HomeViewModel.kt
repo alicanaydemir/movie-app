@@ -1,7 +1,10 @@
 package com.aydemir.movieapp.ui.home
 
+import android.os.Parcelable
+import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.viewModelScope
 import com.aydemir.movieapp.core.BaseViewModel
+import com.aydemir.movieapp.core.Constants
 import com.aydemir.movieapp.core.ErrorResponse
 import com.aydemir.movieapp.core.Resource
 import com.aydemir.movieapp.data.model.Movie
@@ -15,11 +18,16 @@ import javax.inject.Inject
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(
+    val state: SavedStateHandle,
     private val repositoryImp: Repository
 ) : BaseViewModel() {
 
     private val _uiState = MutableStateFlow<UiStateHome>(UiStateHome.Loading)
     val uiState: StateFlow<UiStateHome> = _uiState
+
+    fun saveState(data: MutableMap<Int, Parcelable?>) {
+        state[Constants.Key.STATE] = data
+    }
 
     init {
         viewModelScope.launch {

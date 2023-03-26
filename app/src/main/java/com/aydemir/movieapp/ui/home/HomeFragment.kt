@@ -1,6 +1,7 @@
 package com.aydemir.movieapp.ui.home
 
 import android.os.Bundle
+import android.os.Parcelable
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
@@ -8,6 +9,7 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import com.aydemir.movieapp.NavGraphDirections
 import com.aydemir.movieapp.core.BaseFragment
+import com.aydemir.movieapp.core.Constants
 import com.aydemir.movieapp.databinding.FragmentHomeBinding
 import com.aydemir.movieapp.util.extensions.hide
 import com.aydemir.movieapp.util.extensions.show
@@ -52,8 +54,15 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
     }
 
     override fun onDestroyView() {
-        homeListAdapter.saveStateRecyclerViews()
         super.onDestroyView()
+        homeListAdapter.saveStateRecyclerViews()
+        viewModel.saveState(homeListAdapter.scrollStates)
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        homeListAdapter.saveStateRecyclerViews()
+        viewModel.saveState(homeListAdapter.scrollStates)
     }
 
     private fun setListener() {
@@ -84,6 +93,15 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
 
                             }
                         }
+                    }
+                }
+
+                viewLifecycleOwner.lifecycleScope.launch {
+                    viewModel.state.getStateFlow<MutableMap<Int, Parcelable?>>(
+                        Constants.Key.STATE,
+                        mutableMapOf()
+                    ).collect {
+                        homeListAdapter.scrollStates = it
                     }
                 }
             }
