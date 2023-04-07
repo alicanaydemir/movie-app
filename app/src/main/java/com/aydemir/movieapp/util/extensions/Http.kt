@@ -1,7 +1,7 @@
 package com.aydemir.movieapp.util.extensions
 
-import com.aydemir.movieapp.core.ErrorResponse
-import com.aydemir.movieapp.core.Resource
+import com.aydemir.core.base.ErrorResponse
+import com.aydemir.core.base.Resource
 import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.json.Json
 import okhttp3.ResponseBody

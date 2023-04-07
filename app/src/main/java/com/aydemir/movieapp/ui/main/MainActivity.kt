@@ -6,8 +6,8 @@ import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
+import com.aydemir.core.base.BaseActivity
 import com.aydemir.movieapp.R
-import com.aydemir.movieapp.core.BaseActivity
 import com.aydemir.movieapp.databinding.ActivityMainBinding
 import com.aydemir.movieapp.util.extensions.setVisibilityBottom
 import dagger.hilt.android.AndroidEntryPoint

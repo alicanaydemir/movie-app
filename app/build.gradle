@@ -51,6 +51,9 @@ android {
 
 dependencies {
 
+    implementation project(path: ':core')
+    implementation project(path: ':feature:settings')
+
     def lifecycle_version = "2.6.0-alpha03"
     def hilt_version = '2.44.2'
     def nav_version = "2.5.3"

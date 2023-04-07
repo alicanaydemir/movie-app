@@ -4,8 +4,8 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.viewbinding.ViewBinding
-import com.aydemir.movieapp.core.BaseAdapter
-import com.aydemir.movieapp.core.BaseViewHolder
+import com.aydemir.core.base.BaseAdapter
+import com.aydemir.core.base.BaseViewHolder
 import com.aydemir.movieapp.data.model.Genre
 import com.aydemir.movieapp.databinding.ItemGenreBinding
 

@@ -5,9 +5,9 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.viewbinding.ViewBinding
 import coil.load
-import com.aydemir.movieapp.core.BaseAdapter
-import com.aydemir.movieapp.core.BaseViewHolder
-import com.aydemir.movieapp.core.Constants
+import com.aydemir.core.base.BaseAdapter
+import com.aydemir.core.base.BaseViewHolder
+import com.aydemir.core.base.Constants
 import com.aydemir.movieapp.data.model.Cast
 import com.aydemir.movieapp.databinding.ItemCastBinding
 

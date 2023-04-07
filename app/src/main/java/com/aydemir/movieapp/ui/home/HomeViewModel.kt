@@ -1,9 +1,9 @@
 package com.aydemir.movieapp.ui.home
 
 import androidx.lifecycle.viewModelScope
-import com.aydemir.movieapp.core.BaseViewModel
-import com.aydemir.movieapp.core.ErrorResponse
-import com.aydemir.movieapp.core.Resource
+import com.aydemir.core.base.BaseViewModel
+import com.aydemir.core.base.ErrorResponse
+import com.aydemir.core.base.Resource
 import com.aydemir.movieapp.data.model.Movie
 import com.aydemir.movieapp.data.remote.Repository
 import dagger.hilt.android.lifecycle.HiltViewModel

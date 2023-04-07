@@ -2,10 +2,10 @@ package com.aydemir.movieapp.ui.movieDetail
 
 import android.content.Context
 import androidx.lifecycle.viewModelScope
-import com.aydemir.movieapp.R
-import com.aydemir.movieapp.core.BaseViewModel
-import com.aydemir.movieapp.core.ErrorResponse
-import com.aydemir.movieapp.core.Resource
+import com.aydemir.core.R
+import com.aydemir.core.base.BaseViewModel
+import com.aydemir.core.base.ErrorResponse
+import com.aydemir.core.base.Resource
 import com.aydemir.movieapp.data.model.Cast
 import com.aydemir.movieapp.data.model.Genre
 import com.aydemir.movieapp.data.model.Movie

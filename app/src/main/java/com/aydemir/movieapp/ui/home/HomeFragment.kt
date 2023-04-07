@@ -6,8 +6,8 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
+import com.aydemir.core.base.BaseFragment
 import com.aydemir.movieapp.NavGraphDirections
-import com.aydemir.movieapp.core.BaseFragment
 import com.aydemir.movieapp.databinding.FragmentHomeBinding
 import com.aydemir.movieapp.util.extensions.hide
 import com.aydemir.movieapp.util.extensions.show

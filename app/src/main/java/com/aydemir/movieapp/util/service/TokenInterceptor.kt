@@ -2,7 +2,7 @@ package com.aydemir.movieapp.util.service
 
 import android.content.Context
 import com.aydemir.movieapp.BuildConfig
-import com.aydemir.movieapp.util.helper.SharedHelper
+import com.aydemir.core.helper.SharedHelper
 import okhttp3.Interceptor
 import okhttp3.Request
 import okhttp3.Response

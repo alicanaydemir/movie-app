@@ -6,10 +6,10 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.viewbinding.ViewBinding
-import com.aydemir.movieapp.core.BaseAdapter
-import com.aydemir.movieapp.core.BaseEvent
-import com.aydemir.movieapp.core.BaseViewHolder
-import com.aydemir.movieapp.core.EventListener
+import com.aydemir.core.base.BaseAdapter
+import com.aydemir.core.base.BaseEvent
+import com.aydemir.core.base.BaseViewHolder
+import com.aydemir.core.base.EventListener
 import com.aydemir.movieapp.data.model.Movie
 import com.aydemir.movieapp.databinding.ItemHomeHeaderBinding
 import com.aydemir.movieapp.databinding.ItemHomeListBinding
@@ -99,7 +99,7 @@ class HomeListAdapter(private val listener: EventListener) :
         when (holder.binding) {
             is ItemHomeListBinding -> {
                 val key = holder.bindingAdapterPosition
-                scrollStates[key] = holder.binding.recyclerView.layoutManager?.onSaveInstanceState()
+                scrollStates[key] =  (holder.binding as ItemHomeListBinding).recyclerView.layoutManager?.onSaveInstanceState()
             }
         }
     }

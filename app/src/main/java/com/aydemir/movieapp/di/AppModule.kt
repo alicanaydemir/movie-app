@@ -2,12 +2,12 @@ package com.aydemir.movieapp.di
 
 import android.content.Context
 import android.content.SharedPreferences
+import com.aydemir.core.helper.SharedHelper
 import com.aydemir.movieapp.BuildConfig
 import com.aydemir.movieapp.data.local.dao.AppDao
 import com.aydemir.movieapp.data.remote.MovieAppApi
 import com.aydemir.movieapp.data.remote.Repository
 import com.aydemir.movieapp.data.remote.RepositoryImp
-import com.aydemir.movieapp.util.helper.SharedHelper
 import com.aydemir.movieapp.util.service.TokenInterceptor
 import com.facebook.stetho.okhttp3.StethoInterceptor
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory

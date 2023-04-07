@@ -1,7 +1,7 @@
 package com.aydemir.movieapp.util.extensions
 
-import com.aydemir.movieapp.core.ErrorResponse
-import com.aydemir.movieapp.core.Resource
+import com.aydemir.core.base.ErrorResponse
+import com.aydemir.core.base.Resource
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow

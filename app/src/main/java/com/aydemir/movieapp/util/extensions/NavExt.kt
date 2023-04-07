@@ -10,7 +10,7 @@ import com.aydemir.movieapp.databinding.ActivityMainBinding
 fun setVisibilityBottom(destinationId: Int, binding: ActivityMainBinding) {
 
     when (destinationId) {
-        R.id.homeFragment, R.id.settingsFragment, R.id.favoritesFragment -> {
+        R.id.homeFragment, com.aydemir.settings.R.id.settingsFragment, R.id.favoritesFragment -> {
             showView(binding)
         }
 

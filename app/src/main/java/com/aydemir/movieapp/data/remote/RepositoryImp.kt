@@ -1,6 +1,6 @@
 package com.aydemir.movieapp.data.remote
 
-import com.aydemir.movieapp.core.Resource
+import com.aydemir.core.base.Resource
 import com.aydemir.movieapp.data.local.dao.AppDao
 import com.aydemir.movieapp.data.model.Movie
 import com.aydemir.movieapp.data.model.ResponseMovieCast

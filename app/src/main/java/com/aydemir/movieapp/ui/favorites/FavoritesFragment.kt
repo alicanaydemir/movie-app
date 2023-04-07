@@ -7,8 +7,8 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
+import com.aydemir.core.base.BaseFragment
 import com.aydemir.movieapp.NavGraphDirections
-import com.aydemir.movieapp.core.BaseFragment
 import com.aydemir.movieapp.databinding.FragmentFavoritesBinding
 import com.aydemir.movieapp.ui.home.HomeListAdapterEvent
 import com.aydemir.movieapp.util.extensions.hide

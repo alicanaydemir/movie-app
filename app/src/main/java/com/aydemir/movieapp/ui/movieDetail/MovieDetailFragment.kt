@@ -9,10 +9,10 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import coil.load
+import com.aydemir.core.base.BaseFragment
+import com.aydemir.core.base.Constants
 import com.aydemir.movieapp.NavGraphDirections
 import com.aydemir.movieapp.R
-import com.aydemir.movieapp.core.BaseFragment
-import com.aydemir.movieapp.core.Constants
 import com.aydemir.movieapp.databinding.FragmentMovieDetailBinding
 import com.aydemir.movieapp.util.extensions.getDateFormatted
 import com.aydemir.movieapp.util.extensions.hide
