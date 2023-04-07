@@ -8,11 +8,11 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.aydemir.core.base.BaseFragment
+import com.aydemir.core.extensions.hide
+import com.aydemir.core.extensions.show
+import com.aydemir.home.HomeListAdapterEvent
 import com.aydemir.movieapp.NavGraphDirections
 import com.aydemir.movieapp.databinding.FragmentFavoritesBinding
-import com.aydemir.movieapp.ui.home.HomeListAdapterEvent
-import com.aydemir.movieapp.util.extensions.hide
-import com.aydemir.movieapp.util.extensions.show
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 

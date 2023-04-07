@@ -6,10 +6,10 @@ import com.aydemir.core.R
 import com.aydemir.core.base.BaseViewModel
 import com.aydemir.core.base.ErrorResponse
 import com.aydemir.core.base.Resource
-import com.aydemir.movieapp.data.model.Cast
-import com.aydemir.movieapp.data.model.Genre
-import com.aydemir.movieapp.data.model.Movie
-import com.aydemir.movieapp.data.remote.Repository
+import com.aydemir.core.data.model.Cast
+import com.aydemir.core.data.model.Genre
+import com.aydemir.core.data.model.Movie
+import com.aydemir.core.data.remote.Repository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.delay

@@ -2,7 +2,7 @@ package com.aydemir.movieapp.di
 
 import android.app.Application
 import androidx.room.Room
-import com.aydemir.movieapp.data.local.database.MovieAppDatabase
+import com.aydemir.core.data.local.database.MovieAppDatabase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

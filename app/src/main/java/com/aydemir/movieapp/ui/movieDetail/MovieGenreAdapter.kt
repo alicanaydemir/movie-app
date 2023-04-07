@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.viewbinding.ViewBinding
 import com.aydemir.core.base.BaseAdapter
 import com.aydemir.core.base.BaseViewHolder
-import com.aydemir.movieapp.data.model.Genre
+import com.aydemir.core.data.model.Genre
 import com.aydemir.movieapp.databinding.ItemGenreBinding
 
 class MovieGenreAdapter : BaseAdapter<Genre>(object : DiffUtil.ItemCallback<Genre>() {

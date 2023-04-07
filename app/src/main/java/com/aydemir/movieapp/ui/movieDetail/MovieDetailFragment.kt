@@ -14,9 +14,9 @@ import com.aydemir.core.base.Constants
 import com.aydemir.movieapp.NavGraphDirections
 import com.aydemir.movieapp.R
 import com.aydemir.movieapp.databinding.FragmentMovieDetailBinding
-import com.aydemir.movieapp.util.extensions.getDateFormatted
-import com.aydemir.movieapp.util.extensions.hide
-import com.aydemir.movieapp.util.extensions.show
+import com.aydemir.core.extensions.getDateFormatted
+import com.aydemir.core.extensions.hide
+import com.aydemir.core.extensions.show
 import com.google.android.flexbox.FlexDirection
 import com.google.android.flexbox.FlexboxLayoutManager
 import dagger.hilt.android.AndroidEntryPoint

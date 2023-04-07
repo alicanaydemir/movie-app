@@ -6,6 +6,6 @@
     app:startDestination="@id/settingsFragment">
     <fragment
         android:id="@+id/settingsFragment"
-        android:name="com.aydemir.settings.ui.SettingsFragment"
+        android:name="com.aydemir.settings.SettingsFragment"
         android:label="SettingsFragment" />
 </navigation>

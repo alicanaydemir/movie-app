@@ -8,7 +8,7 @@ import coil.load
 import com.aydemir.core.base.BaseAdapter
 import com.aydemir.core.base.BaseViewHolder
 import com.aydemir.core.base.Constants
-import com.aydemir.movieapp.data.model.Cast
+import com.aydemir.core.data.model.Cast
 import com.aydemir.movieapp.databinding.ItemCastBinding
 
 class MovieCastAdapter : BaseAdapter<Cast>(object : DiffUtil.ItemCallback<Cast>() {
