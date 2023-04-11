@@ -1,4 +1,4 @@
-package com.aydemir.movieapp.ui.movieDetail
+package com.aydemir.movie.detail
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -7,7 +7,7 @@ import androidx.viewbinding.ViewBinding
 import com.aydemir.core.base.BaseAdapter
 import com.aydemir.core.base.BaseViewHolder
 import com.aydemir.core.data.model.Genre
-import com.aydemir.movieapp.databinding.ItemGenreBinding
+import com.aydemir.movie.detail.databinding.ItemGenreBinding
 
 class MovieGenreAdapter : BaseAdapter<Genre>(object : DiffUtil.ItemCallback<Genre>() {
     override fun areItemsTheSame(oldItem: Genre, newItem: Genre): Boolean {

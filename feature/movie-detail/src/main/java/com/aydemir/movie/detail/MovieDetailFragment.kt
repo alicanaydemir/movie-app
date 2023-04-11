@@ -1,4 +1,4 @@
-package com.aydemir.movieapp.ui.movieDetail
+package com.aydemir.movie.detail
 
 import android.os.Bundle
 import androidx.fragment.app.viewModels
@@ -11,12 +11,10 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import coil.load
 import com.aydemir.core.base.BaseFragment
 import com.aydemir.core.base.Constants
-import com.aydemir.movieapp.NavGraphDirections
-import com.aydemir.movieapp.R
-import com.aydemir.movieapp.databinding.FragmentMovieDetailBinding
 import com.aydemir.core.extensions.getDateFormatted
 import com.aydemir.core.extensions.hide
 import com.aydemir.core.extensions.show
+import com.aydemir.movie.detail.databinding.FragmentMovieDetailBinding
 import com.google.android.flexbox.FlexDirection
 import com.google.android.flexbox.FlexboxLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
@@ -60,7 +58,7 @@ class MovieDetailFragment :
             when (it) {
                 is MovieListHorizontalAdapterEvent.ClickMovie -> {
                     it.data.id?.apply {
-                        val action = NavGraphDirections.actionGlobalMovieDetailFragment(this)
+                        val action = MovieDetailFragmentDirections.actionMovieDetailFragmentSelf(this)
                         findNavController().navigate(action)
                     }
                 }

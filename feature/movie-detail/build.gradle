@@ -9,7 +9,7 @@ plugins {
 }
 
 android {
-    namespace 'com.aydemir.home'
+    namespace 'com.aydemir.movie.detail'
     compileSdk 33
 
     defaultConfig {
@@ -43,7 +43,6 @@ android {
 
 dependencies {
     implementation project(path: ':core')
-    implementation project(path: ':feature:movie-detail')
 
     def lifecycle_version = "2.6.0-alpha03"
     def hilt_version = '2.44.2'

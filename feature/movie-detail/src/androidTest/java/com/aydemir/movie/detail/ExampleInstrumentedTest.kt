@@ -1,4 +1,4 @@
-package com.aydemir.favorite
+package com.aydemir.movie.detail
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4
@@ -19,6 +19,6 @@ class ExampleInstrumentedTest {
     fun useAppContext() {
         // Context of the app under test.
         val appContext = InstrumentationRegistry.getInstrumentation().targetContext
-        assertEquals("com.aydemir.favorite.test", appContext.packageName)
+        assertEquals("com.aydemir.movie.detail.test", appContext.packageName)
     }
 }

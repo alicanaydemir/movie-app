@@ -1,4 +1,4 @@
-package com.aydemir.movieapp.ui.favorites
+package com.aydemir.movie.detail
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -7,9 +7,9 @@ import androidx.viewbinding.ViewBinding
 import coil.load
 import com.aydemir.core.base.*
 import com.aydemir.core.data.model.Movie
-import com.aydemir.movieapp.databinding.ItemMovieBinding
+import com.aydemir.movie.detail.databinding.ItemMovieHorizontalBinding
 
-class FavoriteMovieListAdapter(private val listener: EventListener) :
+class MovieListHorizontalAdapter(private val listener: EventListener) :
     BaseAdapter<Movie>(object : DiffUtil.ItemCallback<Movie>() {
         override fun areItemsTheSame(oldItem: Movie, newItem: Movie): Boolean {
             return oldItem.id == newItem.id
@@ -23,18 +23,18 @@ class FavoriteMovieListAdapter(private val listener: EventListener) :
     override fun createViewHolderInstance(
         parent: ViewGroup, viewType: Int
     ): BaseViewHolder<ViewBinding> {
-        val binding: ItemMovieBinding = ItemMovieBinding.inflate(
+        val binding: ItemMovieHorizontalBinding = ItemMovieHorizontalBinding.inflate(
             LayoutInflater.from(parent.context), parent, false
         )
         val holder = BaseViewHolder(binding)
         holder.binding.root.setOnClickListener {
-            listener.invoke(FavoriteMovieListAdapterEvent.ClickMovie(getItem(holder.bindingAdapterPosition)))
+            listener.invoke(MovieListHorizontalAdapterEvent.ClickMovie(getItem(holder.bindingAdapterPosition)))
         }
         return holder
     }
 
     override fun bind(binding: ViewBinding, position: Int) {
-        (binding as ItemMovieBinding).apply {
+        (binding as ItemMovieHorizontalBinding).apply {
             this.imgMoviePosterPath.load(
                 Constants.Pref.BASE_IMG_URL + getItem(
                     position
@@ -47,6 +47,6 @@ class FavoriteMovieListAdapter(private val listener: EventListener) :
     }
 }
 
-sealed class FavoriteMovieListAdapterEvent : BaseEvent {
-    class ClickMovie(val data: Movie) : FavoriteMovieListAdapterEvent()
+sealed class MovieListHorizontalAdapterEvent : BaseEvent {
+    class ClickMovie(val data: Movie) : MovieListHorizontalAdapterEvent()
 }

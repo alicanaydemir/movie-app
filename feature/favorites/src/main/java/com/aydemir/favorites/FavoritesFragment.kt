@@ -1,18 +1,19 @@
-package com.aydemir.movieapp.ui.favorites
+package com.aydemir.favorites
 
 import android.os.Bundle
+import androidx.core.net.toUri
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.NavDeepLinkRequest
+import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.aydemir.core.base.BaseFragment
 import com.aydemir.core.extensions.hide
 import com.aydemir.core.extensions.show
-import com.aydemir.home.HomeListAdapterEvent
-import com.aydemir.movieapp.NavGraphDirections
-import com.aydemir.movieapp.databinding.FragmentFavoritesBinding
+import com.aydemir.favorites.databinding.FragmentFavoritesBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
@@ -26,14 +27,18 @@ class FavoritesFragment :
             when (it) {
                 is FavoriteMovieListAdapterEvent.ClickMovie -> {
                     it.data.id?.let { id ->
-                        val action = NavGraphDirections.actionGlobalMovieDetailFragment(
-                            id
-                        )
-                        findNavController().navigate(action)
+                        val navOptions =
+                            NavOptions.Builder()
+                                .setEnterAnim(com.aydemir.core.R.anim.anim_slide_in_left)
+                                .setExitAnim(com.aydemir.core.R.anim.anim_slide_out_left)
+                                .setPopEnterAnim(com.aydemir.core.R.anim.anim_slide_out_right)
+                                .setPopExitAnim(com.aydemir.core.R.anim.anim_slide_in_right)
+                                .build()
+                        val request = NavDeepLinkRequest.Builder
+                            .fromUri("movieApp://movie-detail-screen/?id=$id".toUri())
+                            .build()
+                        findNavController().navigate(request, navOptions)
                     }
-                }
-                is HomeListAdapterEvent.ClickHeader -> {
-
                 }
             }
         }

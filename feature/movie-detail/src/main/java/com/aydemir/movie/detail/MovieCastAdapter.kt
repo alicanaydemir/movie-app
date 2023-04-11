@@ -1,4 +1,4 @@
-package com.aydemir.movieapp.ui.movieDetail
+package com.aydemir.movie.detail
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -9,7 +9,7 @@ import com.aydemir.core.base.BaseAdapter
 import com.aydemir.core.base.BaseViewHolder
 import com.aydemir.core.base.Constants
 import com.aydemir.core.data.model.Cast
-import com.aydemir.movieapp.databinding.ItemCastBinding
+import com.aydemir.movie.detail.databinding.ItemCastBinding
 
 class MovieCastAdapter : BaseAdapter<Cast>(object : DiffUtil.ItemCallback<Cast>() {
     override fun areItemsTheSame(oldItem: Cast, newItem: Cast): Boolean {

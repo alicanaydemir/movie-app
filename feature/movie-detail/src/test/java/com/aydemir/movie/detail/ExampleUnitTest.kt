@@ -1,4 +1,4 @@
-package com.aydemir.favorite
+package com.aydemir.movie.detail
 
 import org.junit.Test
 

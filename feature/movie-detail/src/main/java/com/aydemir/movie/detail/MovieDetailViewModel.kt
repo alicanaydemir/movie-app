@@ -1,4 +1,4 @@
-package com.aydemir.movieapp.ui.movieDetail
+package com.aydemir.movie.detail
 
 import android.content.Context
 import androidx.lifecycle.viewModelScope

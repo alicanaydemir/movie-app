@@ -1,4 +1,4 @@
-package com.aydemir.movieapp.ui.favorites
+package com.aydemir.favorites
 
 import androidx.lifecycle.viewModelScope
 import com.aydemir.core.base.BaseViewModel

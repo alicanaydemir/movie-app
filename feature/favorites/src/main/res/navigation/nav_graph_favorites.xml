@@ -6,6 +6,6 @@
     app:startDestination="@id/favoritesFragment">
     <fragment
         android:id="@+id/favoritesFragment"
-        android:name="com.aydemir.movieapp.ui.favorites.FavoritesFragment"
+        android:name="com.aydemir.favorites.FavoritesFragment"
         android:label="FavoritesFragment" />
 </navigation>
