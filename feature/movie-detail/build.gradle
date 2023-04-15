@@ -43,6 +43,8 @@ android {
 
 dependencies {
     implementation project(path: ':core')
+    implementation project(path: ':core-data')
+    implementation project(path: ':core-database')
 
     def lifecycle_version = "2.6.0-alpha03"
     def hilt_version = '2.44.2'

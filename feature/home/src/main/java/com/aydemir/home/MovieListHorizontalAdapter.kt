@@ -5,8 +5,12 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.viewbinding.ViewBinding
 import coil.load
-import com.aydemir.core.base.*
-import com.aydemir.core.data.model.Movie
+import com.aydemir.core.base.BaseAdapter
+import com.aydemir.core.base.BaseEvent
+import com.aydemir.core.base.BaseViewHolder
+import com.aydemir.core.base.Constants
+import com.aydemir.core.base.EventListener
+import com.aydemir.core.database.model.Movie
 import com.aydemir.home.databinding.ItemMovieHorizontalBinding
 
 class MovieListHorizontalAdapter(private val listener: EventListener) :

@@ -4,8 +4,8 @@ import androidx.lifecycle.viewModelScope
 import com.aydemir.core.base.BaseViewModel
 import com.aydemir.core.base.ErrorResponse
 import com.aydemir.core.base.Resource
-import com.aydemir.core.data.model.Movie
-import com.aydemir.core.data.remote.Repository
+import com.aydemir.core.data.Repository
+import com.aydemir.core.database.model.Movie
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow

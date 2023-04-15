@@ -10,7 +10,7 @@ import com.aydemir.core.base.BaseAdapter
 import com.aydemir.core.base.BaseEvent
 import com.aydemir.core.base.BaseViewHolder
 import com.aydemir.core.base.EventListener
-import com.aydemir.core.data.model.Movie
+import com.aydemir.core.database.model.Movie
 import com.aydemir.home.databinding.ItemHomeHeaderBinding
 import com.aydemir.home.databinding.ItemHomeListBinding
 
